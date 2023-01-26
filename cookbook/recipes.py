@@ -17,7 +17,7 @@ def usage():
           " --full\n"
           " --io-error\n"
           " --quota\n"
-          " --delay\n"
+          " --delay DELAY_MICROS\n"
           " --random\n"
           " --specific-syscalls\n"
           " --probability\n"
@@ -57,7 +57,7 @@ def main():
         client.set_all_fault(False, [errno.EDQUOT], 0, "", False, 0, False)
     elif sys.argv[1] == "--delay":
         print("Simulating delayed IO")
-        client.set_all_fault(False, [], 0, "", False, 50000, False)
+        client.set_all_fault(False, [], 0, "", False, int(sys.argv[2]), False)
     elif sys.argv[1] == "--random":
         # Use all errnos, minus any specified in trailing arguments.
         errnos_selected = {code: name for code, name in
